@@ -3,19 +3,19 @@ pipeline {
 
   stages {
     stage('Checkout') {
-      steps {
-        git branch: 'main', url: 'https://github.com/archibaldnewb/lbg-vat-calculator.git'
-      }
+        steps {
+          git branch: 'main', url: 'https://github.com/archibaldnewb/lbg-vat-calculator.git'
+        }
     }
     stage('SonarQube Analysis') {
-      enviroment {
+      environment {
         scannerHome = tool 'sonarqube'
       }
-      steps {
-        withSonarQubeEnv('sonar-qube-archien') {
-          sh "${scannerHome}/bin/sonar-scanner"
+        steps {
+            withSonarQubeEnv('sonar-qube-archien') {        
+              sh "${scannerHome}/bin/sonar-scanner"
+            }   
         }
-      }
     }
   }
 }
